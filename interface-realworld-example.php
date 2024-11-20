@@ -33,5 +33,47 @@ $notifiers = [
 ];
 
 foreach ($notifiers as $notifier) {
-    $notifier->sendNotification("Hello, this is a test notification!");
+    // $notifier->sendNotification("Hello, this is a test notification!");
 }
+
+
+// EXAMPLE #2
+
+interface Food {
+    public function getNutrition(): int;
+}
+
+class Sausage implements Food {
+    public function getNutrition(): int {
+        return 10; // Nutritional value
+    }
+}
+
+class Fish implements Food {
+    public function getNutrition(): int {
+        return 15; // Nutritional value
+    }
+}
+
+class Cat {
+    private $energy = 0;
+
+    public function eat(Food $food) {
+        $this->energy += $food->getNutrition();
+    }
+
+    public function getEnergy(): int {
+        return $this->energy;
+    }
+}
+
+// Usage
+$cat = new Cat();
+$sausage = new Sausage();
+$fish = new Fish();
+
+$cat->eat($sausage); // Cat eats sausage
+echo "Cat's energy: " . $cat->getEnergy() .PHP_EOL; // Output: Cat's energy: 10
+
+$cat->eat($fish);    // Cat eats fish
+echo "Cat's energy: " . $cat->getEnergy().PHP_EOL; // Output: Cat's energy: 25
